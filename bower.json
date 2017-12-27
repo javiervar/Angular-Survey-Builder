@@ -1,0 +1,24 @@
+{
+  "name": "EgresadosSurvey",
+  "author": "Javier Valdez",
+  "description": "Egresados Survey Builder",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "documentation"
+  ],
+  "devDependencies": {
+    "jquery": "^2.2.3",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "fontawesome#^4.6.1"
+  },
+  "resolutions": {
+    "jquery": "^2.2.3"
+  },
+  "dependencies": {
+    "angular": "^1.6.6",
+    "angular-ui-sortable": "^0.17.2",
+    "seiyria-bootstrap-slider": "^9.9.0",
+    "angular-drag-and-drop-lists": "^2.1.0"
+  }
+}

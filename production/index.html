@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Constructor Egresados </title>
+  <!-- Bootstrap -->
+  <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+  <link href="css/custom.min.css" rel="stylesheet">
+  <!-- Font Roboto-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:light&amp;lang=en" rel="stylesheet">
+
+
+  </head>
+  <body ng-controller="builder">
+    <div class="contenido">
+      <div class="encabezado row">
+          <div class="form-group">
+            <input type="text" class="form-control" ng-model="survey.name" placeholder="Titulo">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" ng-model="survey.description" placeholder="Descripcion">
+          </div>
+      </div>
+      <div class="preguntasContenedor" dnd-list="survey.questions"
+        dnd-allowed-types="question.type"
+      >
+
+        <div class="pregunta row" ng-repeat="question in survey.questions track by $index"
+              dnd-draggable="question"
+              dnd-disable-if="question.type == 'unknown'"
+              dnd-moved="survey.questions.splice($index, 1)"
+        >
+        <div class="tools">
+          <button type="button" class="toolBtn" name="button" style="float:right"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
+          <button type="button" class="toolBtn" name="button" ng-click="remove($index)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          <button type="button" class="toolBtn" name="button" ng-click="clone(question)"><i class="fa fa-clone" aria-hidden="true"></i></button>
+        </div>
+        <div class="inside">
+        <dnd-nodrag>
+          <div class="row">
+            <div class="col-xs-6">
+              <input type="text" class="form-control" name="" value="" ng-model="question.description" placeholder="PREGUNTA..">
+            </div>
+            <div class="col-xs-5">
+              <select class="form-control" name="" ng-model="question.type" >
+                <option value="">Selecciona...</option>
+                <option value="1">SI-NO</option>
+                <option value="2">1-10</option>
+              </select>
+            </div>
+          </div>
+        <div class="row" ng-if="question.type==1">
+          <div class="col-xs-12">
+            <label for="">SI</label>
+            <input type="radio" name="opcion" value="1">
+            <label for="">NO</label>
+            <input type="radio" name="opcion" value="2">
+          </div>
+
+        </div>
+        <div class="row" ng-if="question.type==2">
+          <div class="col-xs-12">
+            <label for="">{{rank_value}}</label>
+              <input type="range" min="1" max="10" ng-value="1" class="slider" ng-model="rank_value">
+          </div>
+        </div>
+      </dnd-nodrag>
+        </div>
+      </div>
+
+      </div>
+      <div class="row boton">
+          <button class="plusBtn" ng-click="add()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+      </div>
+    </div>
+    <div class="">
+      {{survey}}
+    </div>
+
+    <script type="text/javascript" src="../vendors/angular/angular.min.js"></script>
+    <script type="text/javascript" src="js/surveyBuilder.js"></script>
+    <script type="text/javascript" src="../vendors/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../vendors/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js">
+
+    </script>
+
+  </body>
+</html>
